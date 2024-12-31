@@ -1,16 +1,11 @@
 package com.example.servlets.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
-import java.util.Objects;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "appuser", schema = "public", catalog = "postgres")
+@Table(name = "AppUser", schema = "public", catalog = "servlets")
 public class AppUserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -25,12 +20,52 @@ public class AppUserEntity {
     @Basic
     @Column(name = "password")
     private String password;
-    @Enumerated(EnumType.STRING) // Store the enum value as a string in the database
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GradeEntity> grades;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -40,10 +75,10 @@ public class AppUserEntity {
         AppUserEntity that = (AppUserEntity) o;
 
         if (id != that.id) return false;
-        if (!Objects.equals(username, that.username)) return false;
-        if (!Objects.equals(email, that.email)) return false;
-        if (!Objects.equals(password, that.password)) return false;
-        if (!Objects.equals(role, that.role)) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (role != null ? !role.equals(that.role) : that.role != null) return false;
 
         return true;
     }

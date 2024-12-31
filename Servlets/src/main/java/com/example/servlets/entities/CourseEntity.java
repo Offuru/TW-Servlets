@@ -1,16 +1,11 @@
 package com.example.servlets.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
-import java.util.Objects;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "course", schema = "public", catalog = "postgres")
+@Table(name = "Course", schema = "public", catalog = "servlets")
 public class CourseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -26,6 +21,30 @@ public class CourseEntity {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GradeEntity> grades;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,7 +54,7 @@ public class CourseEntity {
 
         if (id != that.id) return false;
         if (credits != that.credits) return false;
-        if (!Objects.equals(name, that.name)) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
     }

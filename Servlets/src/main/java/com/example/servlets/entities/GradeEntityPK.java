@@ -4,13 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
 public class GradeEntityPK implements Serializable {
     @Column(name = "user_id")
     @Id
@@ -20,6 +16,22 @@ public class GradeEntityPK implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long courseId;
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
+    }
 
     @Override
     public boolean equals(Object o) {

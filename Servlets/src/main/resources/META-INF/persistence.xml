@@ -5,23 +5,23 @@
              version="3.0">
   <persistence-unit name="default">
 
-      <class>com.example.servlets.entities.AppuserEntity</class>
+      <class>com.example.servlets.entities.AppUserEntity</class>
       <class>com.example.servlets.entities.CourseEntity</class>
       <class>com.example.servlets.entities.GradeEntity</class>
       <properties>
-          <property name="toplink.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+          <property name="toplink.jdbc.url" value="jdbc:postgresql://localhost:5432/servlets"/>
           <property name="toplink.jdbc.driver" value="org.postgresql.Driver"/>
           <property name="toplink.jdbc.user" value="postgres"/>
           <property name="toplink.jdbc.password" value="1q2w3e"/>
-          <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+          <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/servlets"/>
           <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
           <property name="hibernate.connection.username" value="postgres"/>
           <property name="hibernate.connection.password" value="1q2w3e"/>
-          <property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/postgres"/>
+          <property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/servlets"/>
           <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
           <property name="openjpa.ConnectionUserName" value="postgres"/>
           <property name="openjpa.ConnectionPassword" value="1q2w3e"/>
-          <property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+          <property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/servlets"/>
           <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
           <property name="eclipselink.jdbc.user" value="postgres"/>
           <property name="eclipselink.jdbc.password" value="1q2w3e"/>

@@ -1,23 +1,20 @@
 package com.example.servlets.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
-@Table(name = "grade", schema = "public", catalog = "postgres")
+@Table(name = "Grade", schema = "public", catalog = "servlets")
 @IdClass(GradeEntityPK.class)
 public class GradeEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_id")
     private long userId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "course_id")
     private long courseId;
+    @Basic
+    @Column(name = "score")
+    private int score;
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
@@ -27,9 +24,29 @@ public class GradeEntity {
     @JoinColumn(name = "course_id", insertable = false, updatable = false)
     private CourseEntity course;
 
-    @Basic
-    @Column(name = "score")
-    private int score;
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(long courseId) {
+        this.courseId = courseId;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     @Override
     public boolean equals(Object o) {
