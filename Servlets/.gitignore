@@ -1,13 +1,11 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
-src/main/resources/META-INF/persistence.xml
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
 mvnw
 mvnw.cmd
-
 .idea
 .mvn
 .idea/modules.xml
