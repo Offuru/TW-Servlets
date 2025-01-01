@@ -1,7 +1,17 @@
 package com.example.servlets.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Grade", schema = "public", catalog = "servlets")
 @IdClass(GradeEntityPK.class)
@@ -16,6 +26,10 @@ public class GradeEntity {
     @Column(name = "score")
     private int score;
 
+    @Basic
+    @Column(name = "date") // New date field
+    private LocalDate dateAssigned;
+
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private AppUserEntity user;
@@ -24,40 +38,23 @@ public class GradeEntity {
     @JoinColumn(name = "course_id", insertable = false, updatable = false)
     private CourseEntity course;
 
-    public AppUserEntity getUser() {
-        return user;
-    }
-
     public void setUser(AppUserEntity user) {
         this.user = user;
-    }
-
-    public CourseEntity getCourse() {
-        return course;
     }
 
     public void setCourse(CourseEntity course) {
         this.course = course;
     }
 
-    public long getUserId() {
-        return userId;
-    }
-
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public long getCourseId() {
-        return courseId;
     }
 
     public void setCourseId(long courseId) {
         this.courseId = courseId;
     }
-
-    public int getScore() {
-        return score;
+    public void setDateAssigned(LocalDate dateAssigned) {
+        this.dateAssigned = dateAssigned;
     }
 
     public void setScore(int score) {

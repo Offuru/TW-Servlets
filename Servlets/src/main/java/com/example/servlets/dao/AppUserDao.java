@@ -73,4 +73,18 @@ public class AppUserDao {
                         .executeUpdate()
         );
     }
+
+    public Optional<AppUserEntity> login(AppUserEntity user) {
+
+        Optional<AppUserEntity> databaseUser = getByEmail(user.getEmail());
+
+        if (databaseUser.isEmpty())
+            return Optional.empty();
+
+        if (databaseUser.get().getPassword().equals(user.getPassword())) {
+            return databaseUser;
+        } else {
+            return Optional.empty();
+        }
+    }
 }

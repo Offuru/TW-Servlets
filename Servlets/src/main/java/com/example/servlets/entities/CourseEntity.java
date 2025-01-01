@@ -1,15 +1,20 @@
 package com.example.servlets.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Course", schema = "public", catalog = "servlets")
 public class CourseEntity {
-    public List<GradeEntity> getGrades() {
-        return grades;
-    }
 
     public void setGrades(List<GradeEntity> grades) {
         this.grades = grades;
@@ -29,24 +34,12 @@ public class CourseEntity {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GradeEntity> grades;
 
-    public long getId() {
-        return id;
-    }
-
     public void setId(long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getCredits() {
-        return credits;
     }
 
     public void setCredits(int credits) {
