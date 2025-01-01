@@ -7,6 +7,14 @@ import java.util.List;
 @Entity
 @Table(name = "Course", schema = "public", catalog = "servlets")
 public class CourseEntity {
+    public List<GradeEntity> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<GradeEntity> grades) {
+        this.grades = grades;
+    }
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")

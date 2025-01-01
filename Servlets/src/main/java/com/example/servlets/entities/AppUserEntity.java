@@ -21,8 +21,16 @@ public class AppUserEntity {
     @Column(name = "password")
     private String password;
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
+    @Column(name = "role", columnDefinition = "UserRole")
     private Role role;
+
+    public List<GradeEntity> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<GradeEntity> grades) {
+        this.grades = grades;
+    }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GradeEntity> grades;

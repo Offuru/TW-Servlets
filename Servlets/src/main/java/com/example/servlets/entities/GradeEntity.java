@@ -24,6 +24,22 @@ public class GradeEntity {
     @JoinColumn(name = "course_id", insertable = false, updatable = false)
     private CourseEntity course;
 
+    public AppUserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(AppUserEntity user) {
+        this.user = user;
+    }
+
+    public CourseEntity getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseEntity course) {
+        this.course = course;
+    }
+
     public long getUserId() {
         return userId;
     }
