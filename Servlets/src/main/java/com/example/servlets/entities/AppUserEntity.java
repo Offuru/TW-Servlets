@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Builder
@@ -67,10 +67,10 @@ public class AppUserEntity {
         AppUserEntity that = (AppUserEntity) o;
 
         if (id != that.id) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (role != null ? !role.equals(that.role) : that.role != null) return false;
+        if (!Objects.equals(username, that.username)) return false;
+        if (!Objects.equals(email, that.email)) return false;
+        if (!Objects.equals(password, that.password)) return false;
+        if (!Objects.equals(role, that.role)) return false;
 
         return true;
     }
@@ -83,5 +83,31 @@ public class AppUserEntity {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
+    }
+
+    public Map<CourseEntity, List<GradeEntity>> getGradesByCourse() {
+
+        Map<CourseEntity, List<GradeEntity>> courseGrades = new HashMap<>();
+
+        for (var grade : grades) {
+            if (!courseGrades.containsKey(grade.getCourse())) {
+                courseGrades.put(grade.getCourse(), new ArrayList<GradeEntity>());
+            }
+            courseGrades.get(grade.getCourse()).add(grade);
+        }
+
+        return courseGrades;
+    }
+
+    public Map<CourseEntity, Double> getCourseFinalGrades() {
+
+        Map<CourseEntity, List<GradeEntity>> courseGrades = getGradesByCourse();
+        Map<CourseEntity, Double> finalGrades = new HashMap<>();
+
+        for (var key : courseGrades.keySet()) {
+            finalGrades.put(key, courseGrades.get(key).stream().mapToInt(GradeEntity::getScore).average().orElse(0.0));
+        }
+
+        return finalGrades;
     }
 }
