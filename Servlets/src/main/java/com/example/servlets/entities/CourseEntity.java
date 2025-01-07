@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Builder
@@ -24,6 +25,7 @@ public class CourseEntity {
     @Id
     @Column(name = "id")
     private long id;
+
     @Basic
     @Column(name = "name")
     private String name;
@@ -33,6 +35,14 @@ public class CourseEntity {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GradeEntity> grades;
+
+    @Basic
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private long userId; // Explicit column for storing user_id
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private AppUserEntity user;
 
     public void setId(long id) {
         this.id = id;
@@ -55,7 +65,8 @@ public class CourseEntity {
 
         if (id != that.id) return false;
         if (credits != that.credits) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (userId != that.userId) return false;
+        if (!Objects.equals(name, that.name)) return false;
 
         return true;
     }

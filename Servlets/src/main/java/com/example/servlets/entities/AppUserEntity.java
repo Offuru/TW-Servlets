@@ -39,6 +39,9 @@ public class AppUserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GradeEntity> grades;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CourseEntity> courses;
+
     public void setId(long id) {
         this.id = id;
     }
@@ -49,6 +52,10 @@ public class AppUserEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setCourses(List<CourseEntity> courses) {
+        this.courses = courses;
     }
 
     public void setPassword(String password) {

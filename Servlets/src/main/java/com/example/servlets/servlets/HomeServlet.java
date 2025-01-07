@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @WebServlet(name = "homeServlet", urlPatterns = {"/home"})
 public class HomeServlet extends HttpServlet {
@@ -34,10 +35,16 @@ public class HomeServlet extends HttpServlet {
 
                 session.setAttribute("grades", gradesByCourse);
                 session.setAttribute("finalGrades", finalGrades);
-                getServletContext().getRequestDispatcher("/views/home.jsp").forward(req, resp);
+                getServletContext().getRequestDispatcher("/views/student.jsp").forward(req, resp);
             }
             case TEACHER -> {
-                getServletContext().getRequestDispatcher("/views/home.jsp").forward(req, resp);
+                Map<CourseEntity, Set<AppUserEntity>> usersByCourses = appUserDao.getByCourses(currentUser.getId());
+                session.setAttribute("usersByCourses", usersByCourses);
+                getServletContext().getRequestDispatcher("/views/teacher.jsp").forward(req, resp);
+            }
+
+            default -> {
+                getServletContext().getRequestDispatcher("/views/login.jsp").forward(req, resp);
             }
         }
     }

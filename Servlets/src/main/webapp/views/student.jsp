@@ -156,6 +156,7 @@
         %>
         <div id="grades-<%= i %>" class="grade-container" style="display: none;">
             <h3>Grades for <%= course.getName() %></h3>
+            <h3>Teacher: <%= course.getUser().getUsername()%></h3>
             <table>
                 <thead>
                 <tr>
@@ -179,6 +180,7 @@
             }
         %>
     </div>
+
 </div>
 
 <script>

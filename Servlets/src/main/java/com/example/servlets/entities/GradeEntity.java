@@ -14,14 +14,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "Grade", schema = "public", catalog = "servlets")
-@IdClass(GradeEntityPK.class)
 public class GradeEntity {
+
     @Id
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
+
+    @Column(name = "user_id", nullable = false)
     private long userId;
-    @Id
-    @Column(name = "course_id")
+
+    @Column(name = "course_id", nullable = false)
     private long courseId;
+
     @Basic
     @Column(name = "score")
     private int score;
@@ -46,6 +51,10 @@ public class GradeEntity {
         this.course = course;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public void setUserId(long userId) {
         this.userId = userId;
     }
@@ -53,6 +62,7 @@ public class GradeEntity {
     public void setCourseId(long courseId) {
         this.courseId = courseId;
     }
+
     public void setDateAssigned(LocalDate dateAssigned) {
         this.dateAssigned = dateAssigned;
     }
@@ -68,6 +78,7 @@ public class GradeEntity {
 
         GradeEntity that = (GradeEntity) o;
 
+        if (id != that.id) return false;
         if (userId != that.userId) return false;
         if (courseId != that.courseId) return false;
         if (score != that.score) return false;
@@ -77,7 +88,8 @@ public class GradeEntity {
 
     @Override
     public int hashCode() {
-        int result = (int) (userId ^ (userId >>> 32));
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
         result = 31 * result + (int) (courseId ^ (courseId >>> 32));
         result = 31 * result + score;
         return result;
